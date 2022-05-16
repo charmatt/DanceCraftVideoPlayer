@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: ExternalVideos
+  m_EditorClassIdentifier: 
+  m_GroupName: ExternalVideos
+  m_Data:
+    m_SerializedData: []
+  m_GUID: d2ca4ff6be964e64cbf14e05d1c887c7
+  m_SerializeEntries:
+  - m_GUID: 011b0ed485d71ae47b343604a1c9bc5d
+    m_Address: Videos/1_Debra_Sloan-FINAL_h265.mp4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1b51c6fa21fbf6b48b40fde91c358820
+    m_Address: Videos/2_Hope_Forstenzer-FINAL_h265.mp4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e3010850d0c0a944692da46c2d37f4be
+    m_Address: Videos/4_Stefanie_Dueck-FINAL_h265.mp4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4e172a7168e6f324ab1e171636aac0a4
+    m_Address: Videos/5_Deborah_Dumka-FINAL_h265.mp4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 64c406b9f73cee74580f55ab513a0d60
+    m_Address: Videos/3_Patrick_Christie-FINAL_h265.mp4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 777d4a8276ca2424b90584f26fa63e8c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 5710cc9d4347df342980887b175afbcd, type: 2}
+    - {fileID: 11400000, guid: 298faf8a07256034c840483d4a02e280, type: 2}
