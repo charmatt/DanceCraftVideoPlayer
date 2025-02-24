@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using CharmGames.Core;
@@ -23,6 +24,8 @@ public class PauseMenu : MonoBehaviour
     private bool isPaused;
 
     private bool videoLoaded;
+
+    private bool showMenuWhenLoaded = true;
 
     //------------------------------------------------------------------------------
     
@@ -62,21 +65,49 @@ public class PauseMenu : MonoBehaviour
     public IEnumerator LoadVideoInternal(int videoIdx)
     {
         ShowMenu(false, false);
-        loadingPanel.SetActive(true);
-        videoPlayerAdapter.PlayVideo(videoIdx);
+        if (videoIdx != 0) {
+            loadingPanel.SetActive(true);
+        }
+        videoPlayerAdapter.PlayVideo(videoIdx, videoIdx == 0);
         yield return new WaitUntil(() => !videoPlayerAdapter.loading);
         loadingPanel.SetActive(false);
+        if (showMenuWhenLoaded) {
+            ShowMenu(true, false);
+            showMenuWhenLoaded = false;
+        }
         videoLoaded = true;
         isPaused = false;
     }
     
+    //------------------------------------------------------------------------------
+
+    private void Awake()
+    {
+        ShowMenu(false, false);
+    }
+
     //------------------------------------------------------------------------------
     
     // Start is called before the first frame update
     void Start()
     {
         QualitySettings.antiAliasing = 4;
-        videoPlayerAdapter.FinishedPlaying.AddListener(() => ShowMenu(true, false));
+        videoPlayerAdapter.FinishedPlaying.AddListener(() =>
+        {
+            showMenuWhenLoaded = true;
+            LoadVideo(0);
+        });
+        // LoadVideo(0);
+        StartCoroutine(PlayMenuVideo());
+    }
+    
+    //------------------------------------------------------------------------------
+
+    private IEnumerator PlayMenuVideo()
+    {
+        yield return new WaitForSeconds(3);
+        LoadVideo(0);
+        yield break;
     }
 
     //------------------------------------------------------------------------------

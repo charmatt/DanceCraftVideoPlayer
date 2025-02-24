@@ -17,24 +17,32 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: d2ca4ff6be964e64cbf14e05d1c887c7
   m_SerializeEntries:
-  - m_GUID: 011b0ed485d71ae47b343604a1c9bc5d
-    m_Address: Videos/1_Debra_Sloan-FINAL_h265.mp4
+  - m_GUID: 41f1475b6df13ef48a25b2485cb28f0e
+    m_Address: Assets/1_Debra_Sloan-FINAL_h265.mp4
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 1b51c6fa21fbf6b48b40fde91c358820
-    m_Address: Videos/2_Hope_Forstenzer-FINAL_h265.mp4
+  - m_GUID: f7ffe617c28d30d49a5fc4fb9638a4db
+    m_Address: Assets/5_Deborah_Dumka-FINAL_h265.mp4
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: e3010850d0c0a944692da46c2d37f4be
-    m_Address: Videos/4_Stefanie_Dueck-FINAL_h265.mp4
+  - m_GUID: ee0de5dcf2656f94aba87358550c92ca
+    m_Address: Assets/4_Stefanie_Dueck-FINAL_h265.mp4
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 4e172a7168e6f324ab1e171636aac0a4
-    m_Address: Videos/5_Deborah_Dumka-FINAL_h265.mp4
+  - m_GUID: 76f09abea3adda2468c89475214e853b
+    m_Address: Assets/DCVR_PICTURE_LOCK_SOUND_MIX_20240722.mp4
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 64c406b9f73cee74580f55ab513a0d60
-    m_Address: Videos/3_Patrick_Christie-FINAL_h265.mp4
+  - m_GUID: 48609672e367869489a83f6121cf862a
+    m_Address: Assets/3_Patrick_Christie-FINAL_h265.mp4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 50798028dd93a6b4c911eaa0efa7eee6
+    m_Address: Assets/2_Hope_Forstenzer-FINAL_h265.mp4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c5619eee358ab8a4885575fe793f9da6
+    m_Address: Assets/Menu_Looping_Video_20240720.mp4
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

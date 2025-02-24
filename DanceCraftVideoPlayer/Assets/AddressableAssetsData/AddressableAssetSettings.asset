@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: 
-  m_DefaultGroup: 7d9d532806e48034dac3551f7aaed842
+  m_DefaultGroup: d2ca4ff6be964e64cbf14e05d1c887c7
   m_CachedHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -36,7 +36,7 @@ MonoBehaviour:
   m_RemoteCatalogBuildPath:
     m_Id: ae0771686d72f024fbecbf814b4a4bf8
   m_RemoteCatalogLoadPath:
-    m_Id: 01db5419b341a394587f134a96b6239a
+    m_Id: /sdcard/Android/obb/com.MattAustin.DanceCraft
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: 
@@ -64,7 +64,7 @@ MonoBehaviour:
       - m_Id: ae0771686d72f024fbecbf814b4a4bf8
         m_Value: ServerData/[BuildTarget]
       - m_Id: 01db5419b341a394587f134a96b6239a
-        m_Value: /sdcard/Android/obb/com.ClaireSanford.ClaireVideoBuiltInRP
+        m_Value: /sdcard/Android/obb/com.MattAustin.DanceCraft
     m_ProfileEntryNames:
     - m_Id: 128e8c944685b2c4f8e34116fd036749
       m_Name: BuildTarget

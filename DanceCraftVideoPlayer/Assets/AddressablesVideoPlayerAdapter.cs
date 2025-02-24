@@ -9,6 +9,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Events;
@@ -24,7 +25,21 @@ namespace CharmGames.Core {
 [RequireComponent(typeof(VideoPlayer))]
 public class AddressablesVideoPlayerAdapter : MonoBehaviour
 {
-    [SerializeField] private AssetReference[] videoClipRefs = null;
+    [SerializeField]
+    private OVRCameraRig rig;
+    
+    // [SerializeField] private AssetReference[] videoClipRefs = null;
+
+    [SerializeField]
+    private string[] clipNames;
+    
+    [SerializeField]
+    private AudioSource[] videoAudioOverrides = null;
+
+    private AudioSource PlayingAudioSource;
+    
+    [SerializeField]
+    private int[] videoClipRotationOffsets;
     
     private VideoPlayer videoPlayer;
 
@@ -43,10 +58,12 @@ public class AddressablesVideoPlayerAdapter : MonoBehaviour
 
     //------------------------------------------------------------------------------
     
-    public void PlayVideo(int index)
+    public void PlayVideo(int index, bool loop = false)
     {
+        videoPlayer.isLooping = loop;
         if (index == playingIdx) {
-            videoPlayer.Play();
+            // videoPlayer.Play();
+            SetPause(false);
             return;
         }
         StartCoroutine(PlayVideoInternal(index));
@@ -59,9 +76,15 @@ public class AddressablesVideoPlayerAdapter : MonoBehaviour
         if (videoPlaying && pause) {
             videoPlaying = false;
             videoPlayer.Pause();
+            if (PlayingAudioSource != null) {
+                PlayingAudioSource.Pause();
+            }
         } else if (!videoPlaying && !pause) {
             videoPlaying = true;
             videoPlayer.Play();
+            if (PlayingAudioSource != null) {
+                PlayingAudioSource.Play();
+            }
         }
         
     }
@@ -71,7 +94,7 @@ public class AddressablesVideoPlayerAdapter : MonoBehaviour
     public void ReleaseVideo()
     {
         videoPlayer.clip = null;
-        Addressables.Release(asyncOperationHandle);
+        // Addressables.Release(asyncOperationHandle);
         videoPlaying = false;
         playingIdx = -1;
     }
@@ -82,20 +105,43 @@ public class AddressablesVideoPlayerAdapter : MonoBehaviour
     {
         try {
             loading = true;
-            if (asyncOperationHandle.IsValid()) {
-                ReleaseVideo();
-            }
-            asyncOperationHandle = videoClipRefs[index].LoadAssetAsync<VideoClip>();
-            yield return asyncOperationHandle;
-            videoPlayer.clip = asyncOperationHandle.Result;
+            videoPlaying = false;
+            // if (asyncOperationHandle.IsValid()) {
+            //     ReleaseVideo();
+            // }
+            // asyncOperationHandle = videoClipRefs[index].LoadAssetAsync<VideoClip>();
+            // yield return asyncOperationHandle;
+            // videoPlayer.clip = asyncOperationHandle.Result;
+            string externalAssetPath = "/sdcard/Android/obb/com.MattAustin.DanceCraft";
+#if UNITY_EDITOR
+            externalAssetPath = Path.GetDirectoryName(Application.dataPath) + "/Assets";
+#endif
+            videoPlayer.source = VideoSource.Url;
+            videoPlayer.url = externalAssetPath + $"/{clipNames[index]}";
             videoPlayer.Prepare();
             yield return new WaitUntil(() => videoPlayer.isPrepared);
+            if (videoAudioOverrides.Length > index && videoAudioOverrides[index] != null) {
+                PlayingAudioSource = videoAudioOverrides[index];
+                PlayingAudioSource.Play();
+                // videoPlayer.audioOutputMode = VideoAudioOutputMode.None;
+                videoPlayer.SetDirectAudioMute(0, true);
+            } else {
+                if (PlayingAudioSource != null) {
+                    PlayingAudioSource.Stop();
+                    PlayingAudioSource = null;
+                }
+                videoPlayer.SetDirectAudioMute(0, false);
+                // videoPlayer.audioOutputMode = VideoAudioOutputMode.Direct;
+            }
             videoPlayer.Play();
             yield return new WaitUntil(() => videoPlayer.isPlaying);
             videoPlaying = true;
             playingIdx = index;
         } finally {
             loading = false;
+            if (videoClipRotationOffsets.Length > index) {
+                rig.transform.Rotate(new Vector3(0, videoClipRotationOffsets[index], 0));
+            }
         }
         
     }
@@ -111,9 +157,16 @@ public class AddressablesVideoPlayerAdapter : MonoBehaviour
     
     //------------------------------------------------------------------------------
 
+    private void Start()
+    {
+        PlayVideo(0, true);
+    }
+
+    //------------------------------------------------------------------------------
+
     private void Update()
     {
-        if (videoPlaying && !videoPlayer.isPlaying) {
+        if (videoPlaying && !videoPlayer.isPlaying && !videoPlayer.isLooping) {
             ReleaseVideo();
             FinishedPlaying.Invoke();
         }
